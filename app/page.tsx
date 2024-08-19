@@ -36,7 +36,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen p-12 text-gray-700">
+    <main className="min-h-screen md:p-12 p-6 flex flex-col text-gray-700">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -51,7 +51,7 @@ export default function Home() {
           className="w-[300px] p-2 border border-gray-300 rounded"
         />
       </form>
-      <div className="flex gap-8 items-center flex-wrap">
+      <div className="flex gap-8 flex-wrap w-fit">
         {themeList.map((theme) => {
           const url = `/api/${theme.slug}?text=${encodeURIComponent(
             text ?? ""

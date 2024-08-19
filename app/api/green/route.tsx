@@ -1,3 +1,4 @@
+import { googleFontsApiKey, googleFontsEndpoint } from "@/lib/constants";
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
 
@@ -7,16 +8,10 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const text = searchParams.get("text");
 
-  const endpoint = new URL("https://www.googleapis.com/webfonts/v1/webfonts");
+  googleFontsEndpoint.searchParams.set("family", "Micro 5 Charted");
+  googleFontsEndpoint.searchParams.set("key", googleFontsApiKey);
 
-  endpoint.searchParams.set("family", "Micro 5 Charted");
-
-  if (!process.env.GOOGLE_FONTS_API_KEY) {
-    throw new Error("GOOGLE_FONTS_API_KEYがセットされていません");
-  }
-  endpoint.searchParams.set("key", process.env.GOOGLE_FONTS_API_KEY);
-
-  const fontInfo = await fetch(endpoint).then((res) => res.json());
+  const fontInfo = await fetch(googleFontsEndpoint).then((res) => res.json());
 
   // console.log(fontInfo);
 
